@@ -1,0 +1,42 @@
+name: jupyter-server-proxy
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [ '3.5', '3.6', '3.7', '3.8' ]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: 'x64'
+    - name: Install Jupyter Server from source
+      run: |
+        git clone https://github.com/jupyter/jupyter_server
+        cd jupyter_server
+        pip install .
+        cd ..
+    - name: Install NBClassic from source
+      run: |
+        git clone https://github.com/Zsailer/nbclassic
+        cd nbclassic
+        pip install .
+        cd ..
+    - name: Install the jupyter-server-proxy from source
+      run: |
+        git clone https://github.com/jupyterhub/jupyter-server-proxy
+        cd nbdime
+        pip install .
+        cd ..
+    - name: Verify that Jupyter Server finds the extension
+      run: |
+        python test.py jupyter_server_proxy
