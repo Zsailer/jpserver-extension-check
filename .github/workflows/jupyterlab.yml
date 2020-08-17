@@ -1,4 +1,4 @@
-name: Testing the nbresuse against Jupyter Server main branch
+name: Testing the JupyterLab against Jupyter Server main branch
 
 on: [push]
 
@@ -31,12 +31,12 @@ jobs:
         cd nbclassic
         pip install .
         cd ..
-    - name: Install the nbresuse from source
+    - name: Install the jupyterlab from source
       run: |
-        git clone https://github.com/yuvipanda/nbresuse
-        cd nbresuse
+        git clone https://github.com/jupyterlab/jupyterlab
+        cd jupyterlab
         pip install .
         cd ..
     - name: Verify that Jupyter Server finds the extension
       run: |
-        python test.py nbresuse
+        python test.py jupyterlab
