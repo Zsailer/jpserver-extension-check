@@ -38,4 +38,5 @@ jobs:
         pip install nbresuse
         cd ..
     - name: Verify that Jupyter Server finds the extension
+      run: |
         python test.py nbresuse
