@@ -1,4 +1,4 @@
-name: Testing the JupyterLab against Jupyter Server main branch
+name: jupyterlab
 
 on: [push]
 

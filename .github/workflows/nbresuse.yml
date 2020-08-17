@@ -1,4 +1,4 @@
-name: Testing the nbresuse against Jupyter Server main branch
+name: nbresuse
 
 on: [push]
 
