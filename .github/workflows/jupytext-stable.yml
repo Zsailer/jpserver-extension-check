@@ -5,6 +5,7 @@ on:
     branches: '*'
   pull_request:
     branches: '*'
+  workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Run twice a day—at the first hour and 12th hour of the day.
