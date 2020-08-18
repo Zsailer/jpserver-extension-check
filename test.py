@@ -29,7 +29,7 @@ if __name__ == "__main__":
     assert extension_name in extensions
 
     # Verify that the extension is loaded and linked
-    #assert extension_name in app.extension_manager._linked_extensions
+    assert extension_name in app.extension_manager.linked_extensions
 
     # Print the success message.
     print(success_msg(extension_name))
