@@ -1,6 +1,14 @@
-name: jupytext
+name: nbdime (stable)
 
-on: [push]
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run twice a day—at the first hour and 12th hour of the day.
+    - cron:  '* 0,12 * * *'
 
 jobs:
   build:
@@ -19,24 +27,18 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         architecture: 'x64'
-    - name: Install Jupyter Server from source
+    - name: Install Jupyter Server
       run: |
-        git clone https://github.com/jupyter/jupyter_server
-        cd jupyter_server
-        pip install .
-        cd ..
-    - name: Install NBClassic from source
+        pip install jupyter_server
+    - name: Install NBClassic
       run: |
-        git clone https://github.com/Zsailer/nbclassic
-        cd nbclassic
-        pip install .
-        cd ..
-    - name: Install the jupytext from source
+        pip install nbclassic
+    - name: Install the nbdime from source
       run: |
-        git clone https://github.com/mwouts/jupytext
-        cd jupytext
+        git clone https://github.com/jupyter/nbdime
+        cd nbdime
         pip install .
         cd ..
     - name: Verify that Jupyter Server finds the extension
       run: |
-        python test.py jupytext
+        python test.py nbdime

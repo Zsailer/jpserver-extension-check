@@ -1,6 +1,14 @@
-name: jupyter-server-proxy
+name: jupyter-server-proxy (latest)
 
-on: [push]
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run twice a day—at the first hour and 12th hour of the day.
+    - cron:  '* 0,12 * * *'
 
 jobs:
   build:
