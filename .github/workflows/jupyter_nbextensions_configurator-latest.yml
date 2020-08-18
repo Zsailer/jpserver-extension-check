@@ -1,4 +1,4 @@
-name: nbgitpuller (stable)
+name: jupyter_nbextensions_configurator (latest)
 
 on:
   push:
@@ -28,18 +28,24 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         architecture: 'x64'
-    - name: Install Jupyter Server
+    - name: Install Jupyter Server from source
       run: |
-        pip install jupyter_server
-    - name: Install NBClassic
+        git clone https://github.com/jupyter/jupyter_server
+        cd jupyter_server
+        pip install .
+        cd ..
+    - name: Install NBClassic from source
       run: |
-        pip install nbclassic
-    - name: Install the nbgitpuller from source
+        git clone https://github.com/Zsailer/nbclassic
+        cd nbclassic
+        pip install .
+        cd ..
+    - name: Install the jupyter_nbextensions_configurator from source
       run: |
-        git clone https://github.com/jupyterhub/nbgitpuller
-        cd nbgitpuller
+        git clone https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator
+        cd jupyter_nbextensions_configurator
         pip install .
         cd ..
     - name: Verify that Jupyter Server finds the extension
       run: |
-        python test.py nbgitpuller
+        python test.py jupyter_nbextensions_configurator
