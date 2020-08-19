@@ -30,10 +30,10 @@ jobs:
         architecture: 'x64'
     - name: Install Jupyter Server
       run: |
-        pip install jupyter_server
+        pip install jupyter_server --pre
     - name: Install NBClassic
       run: |
-        pip install nbclassic
+        pip install nbclassic --pre
     - name: Install the jupyter-server-proxy from source
       run: |
         git clone https://github.com/jupyterhub/jupyter-server-proxy
