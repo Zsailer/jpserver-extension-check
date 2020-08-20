@@ -40,12 +40,9 @@ jobs:
         cd nbclassic
         pip install .
         cd ..
-    - name: Install the jupyter-server-proxy from source
+    - name: Install the jupyter-server-proxy
       run: |
-        git clone https://github.com/jupyterhub/jupyter-server-proxy
-        cd jupyter-server-proxy
-        pip install .
-        cd ..
+        pip install jupyter-server-proxy --pre
     - name: Verify that Jupyter Server finds the extension
       run: |
         python test.py jupyter_server_proxy

@@ -40,12 +40,9 @@ jobs:
         cd nbclassic
         pip install .
         cd ..
-    - name: Install the nbgitpuller from source
+    - name: Install the nbgitpuller
       run: |
-        git clone https://github.com/jupyterhub/nbgitpuller
-        cd nbgitpuller
-        pip install .
-        cd ..
+        pip install nbgitpuller --pre
     - name: Verify that Jupyter Server finds the extension
       run: |
         python test.py nbgitpuller

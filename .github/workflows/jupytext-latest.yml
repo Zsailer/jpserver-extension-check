@@ -40,12 +40,9 @@ jobs:
         cd nbclassic
         pip install .
         cd ..
-    - name: Install the jupytext from source
+    - name: Install the jupytext
       run: |
-        git clone https://github.com/mwouts/jupytext
-        cd jupytext
-        pip install .
-        cd ..
+        pip install jupytext --pre
     - name: Verify that Jupyter Server finds the extension
       run: |
         python test.py jupytext

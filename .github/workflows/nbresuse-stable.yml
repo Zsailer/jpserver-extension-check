@@ -34,12 +34,9 @@ jobs:
     - name: Install NBClassic
       run: |
         pip install nbclassic --pre
-    - name: Install the nbresuse from source
+    - name: Install the nbresuse
       run: |
-        git clone https://github.com/yuvipanda/nbresuse
-        cd nbresuse
-        pip install .
-        cd ..
+        pip install nbresuse --pre
     - name: Verify that Jupyter Server finds the extension
       run: |
         python test.py nbresuse

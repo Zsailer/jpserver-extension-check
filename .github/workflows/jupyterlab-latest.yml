@@ -40,12 +40,9 @@ jobs:
         cd nbclassic
         pip install .
         cd ..
-    - name: Install the jupyterlab from source
+    - name: Install the jupyterlab
       run: |
-        git clone https://github.com/jupyterlab/jupyterlab
-        cd jupyterlab
-        pip install .
-        cd ..
+        pip install jupyterlab --pre
     - name: Verify that Jupyter Server finds the extension
       run: |
         python test.py jupyterlab

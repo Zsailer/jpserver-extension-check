@@ -40,12 +40,9 @@ jobs:
         cd nbclassic
         pip install .
         cd ..
-    - name: Install the nbdime from source
+    - name: Install the nbdime
       run: |
-        git clone https://github.com/jupyter/nbdime
-        cd nbdime
-        pip install .
-        cd ..
+        pip install nbdime --pre
     - name: Verify that Jupyter Server finds the extension
       run: |
         python test.py nbdime

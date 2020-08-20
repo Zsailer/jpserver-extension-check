@@ -34,12 +34,9 @@ jobs:
     - name: Install NBClassic
       run: |
         pip install nbclassic --pre
-    - name: Install the jupyter_nbextensions_configurator from source
+    - name: Install the jupyter_nbextensions_configurator
       run: |
-        git clone https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator
-        cd jupyter_nbextensions_configurator
-        pip install .
-        cd ..
+        pip install jupyter_nbextensions_configurator --pre
     - name: Verify that Jupyter Server finds the extension
       run: |
         python test.py jupyter_nbextensions_configurator
