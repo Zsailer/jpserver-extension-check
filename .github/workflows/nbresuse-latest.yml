@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    # Run twice a day—at the first hour and 12th hour of the day.
-    - cron:  '* 0,12 * * *'
+    # Run once a day—at the first hour of the day.
+    - cron:  '* 0 * * *'
 
 jobs:
   latest:
@@ -17,8 +17,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [ '3.5', '3.6', '3.7', '3.8' ]
+        os: [ubuntu-latest] #, macos-latest, windows-latest]
+        python-version: [ '3.7' ] # [ '3.5', '3.6', '3.7', '3.8' ]
     steps:
     - name: Set environment variable
       shell: bash
@@ -50,6 +50,7 @@ jobs:
       run: |
         python test.py ${{ env.EXTENSION_NAME }}
     - name: Verify that extension is found in Jupyter Server list.
+      shell: bash
       run: |
         jupyter server extension list 1>serverextensions 2>&1
         cat serverextensions | grep "${{ env.EXTENSION_NAME }}.*OK"
@@ -86,6 +87,7 @@ jobs:
       run: |
         python test.py ${{ env.EXTENSION_NAME }}
     - name: Verify that extension is found in Jupyter Server list.
+      shell: bash
       run: |
         jupyter server extension list 1>serverextensions 2>&1
         cat serverextensions | grep "${{ env.EXTENSION_NAME }}.*OK"
