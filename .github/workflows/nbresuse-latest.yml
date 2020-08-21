@@ -53,7 +53,7 @@ jobs:
       shell: bash
       run: |
         jupyter server extension list 1>serverextensions 2>&1
- #       cat serverextensions | grep "${{ env.EXTENSION_NAME }}.*OK"
+        cat serverextensions | grep "${{ env.EXTENSION_NAME }}.*OK"
 
   # stable:
   #   runs-on: ${{ matrix.os }}
