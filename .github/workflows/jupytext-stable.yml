@@ -1,0 +1,50 @@
+name: jupytext (stable)
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run twice a day—at the first hour and 12th hour of the day.
+    - cron:  '* 0 * * *'
+
+jobs:
+  stable:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [ '3.5', '3.6', '3.7', '3.8' ]
+    steps:
+    - name: Set environment variable
+      shell: bash
+      run: |
+        echo '::set-env name=EXTENSION_NAME::jupytext'
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: 'x64'
+    - name: Install Jupyter Server
+      run: |
+        pip install jupyter_server --pre
+    - name: Install NBClassic
+      run: |
+        pip install nbclassic --pre
+    - name: Install the extension
+      run: |
+        pip install ${{ env.EXTENSION_NAME }} --pre
+    - name: Verify that Jupyter Server finds the extension
+      run: |
+        python test.py ${{ env.EXTENSION_NAME }}
+    # - name: Verify that extension is found in Jupyter Server list.
+    #   shell: bash
+    #   run: |
+    #     jupyter server extension list 1>serverextensions 2>&1
+    #     cat serverextensions | grep "${{ env.EXTENSION_NAME }}.*OK"
